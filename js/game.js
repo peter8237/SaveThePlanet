@@ -4,7 +4,7 @@ startMenuEl = getEl("startMenu"),
 bgEl = getEl("gameBackground"),
 scoreEl = getEl("currentScoreDisplay"),
 highscoreEl = getEl("highscoreDisplay"),
-playerVPos = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--player-xpos")),
+playerXPos = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--player-xpos")),
 sfx_jump = new Audio("sfx/jump.mp3"),
 sfx_dead = new Audio("sfx/death.mp3"),
 sfx_music = new Audio("sfx/music_p.mp3");
@@ -62,7 +62,7 @@ function jump() {
 function moveEnemy() {
     if (gameOver) return;
     enemyEl.style.left = (enemyPos -= enemySpeed) + "px";
-    if (enemyPos < 120 + playerVPos && onGround) {
+    if (enemyPos < 120 + playerXPos && onGround) {
         handleGameOver();
     } else if (enemyPos < 0) {
         enemyPos = window.innerWidth;
