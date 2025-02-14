@@ -10,7 +10,7 @@ const enemyEl = getEl("enemyCharacter"),
     sfx_music = new Audio("sfx/music_p.mp3");
 
 let gameOver = false, onGround = true, gameStarted = false,
-    speedMin = 15, speedMax = 39, score = 0, enemyPos = 0, enemySpeed = 0, 
+    speedMin = 15, speedMax = 39, score = 0, enemyPos = 0, enemySpeed = 0, bgSpeed = 3,
     highscore = localStorage.getItem("highscore") ? +localStorage.getItem("highscore") : 0; 
 
 sfx_music.loop = true;
