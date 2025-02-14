@@ -1,7 +1,9 @@
 :root {
     --enemy: url('img/asteroid.png');
+    --enemy-alert: url("img/asteroid_alert.png");
     --enemy-collision: url('img/asteroid_collision.png');
     --player-ground: url('img/erde_ground.png');
+    --player-alert: url("img/erde_alert.png");
     --player-jump: url('img/erde_jump.png');
     --player-collision: url('img/erde_collision.png');
     --game-background: url('../img/weltall.png'); /* bugfix for some chache or other problem, idk */
