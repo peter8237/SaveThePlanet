@@ -1,16 +1,17 @@
 const enemyEl = getEl("enemyCharacter"),
-playerEl = getEl("playerCharacter"),
-startMenuEl = getEl("startMenu"),
-bgEl = getEl("gameBackground"),
-scoreEl = getEl("currentScoreDisplay"),
-highscoreEl = getEl("highscoreDisplay"),
-playerXPos = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--player-xpos")),
-sfx_jump = new Audio("sfx/jump.mp3"),
-sfx_dead = new Audio("sfx/death.mp3"),
-sfx_music = new Audio("sfx/music_p.mp3");
+    playerEl = getEl("playerCharacter"),
+    startMenuEl = getEl("startMenu"),
+    bgEl = getEl("gameBackground"),
+    scoreEl = getEl("currentScoreDisplay"),
+    highscoreEl = getEl("highscoreDisplay"),
+    playerXPos = +getComputedStyle(document.documentElement).getPropertyValue("--player-xpos"), //+ entspricht parseInt()
+    sfx_jump = new Audio("sfx/jump.mp3"),
+    sfx_dead = new Audio("sfx/death.mp3"),
+    sfx_music = new Audio("sfx/music_p.mp3");
 
-let speedMin = 15, speedMax = 39, bgSpeed = 3, score = 0, gameOver = false, onGround = true, gameStarted = false,
-highscore = localStorage.getItem("highscore") ? +localStorage.getItem("highscore") : 0; 
+let gameOver = false, onGround = true, gameStarted = false,
+    speedMin = 15, speedMax = 39, score = 0, enemyPos = 0, enemySpeed = 0, 
+    highscore = localStorage.getItem("highscore") ? +localStorage.getItem("highscore") : 0; 
 
 sfx_music.loop = true;
 
@@ -19,7 +20,7 @@ function getEl(id) {
 }
 
 document.addEventListener("keydown", function (event) {
-    var code = event.code;
+    let code = event.code;
     if (code === "F4") {
         resetHighscore();
     } else if (code === "Space" || code === "KeyW" || code === "ArrowUp") {
@@ -32,6 +33,7 @@ document.addEventListener("keydown", function (event) {
 });
 
 function startGame() {
+    sfx_music.play();
     gameStarted = true;
     gameOver = false;
     score = 0;
@@ -43,7 +45,6 @@ function startGame() {
     updateScores();
     moveBg();
     moveEnemy();
-    sfx_music.play();
 }
 
 function jump() {
@@ -94,4 +95,4 @@ function handleGameOver() {
 
 function randSpeed(min, max) {
     return Math.random() * (max - min) + min;
-}
+} 
