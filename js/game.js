@@ -73,6 +73,7 @@ function moveEnemy() {
         enemyPos = window.innerWidth;
         score++;
         updateScores();
+        enemyEl.style.backgroundImage = "var(--enemy)";
         enemySpeed = randSpeed(speedMin, speedMax);
     }
     requestAnimationFrame(moveEnemy);
