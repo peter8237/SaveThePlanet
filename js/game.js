@@ -61,6 +61,10 @@ function jump() {
 
 function moveEnemy() {
     if (gameOver) return;
+    if (enemyPos < 900 + playerXPos && onGround) {
+        playerEl.style.backgroundImage = "var(--player-alert)";
+        enemyEl.style.backgroundImage = "var(--enemy-alert)";
+    }
     enemyEl.style.left = (enemyPos -= enemySpeed) + "px";
     if (enemyPos < 120 + playerXPos && onGround) {
         handleGameOver();
