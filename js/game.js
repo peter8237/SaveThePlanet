@@ -1,27 +1,3 @@
-let countdownText = ["3", "2", "1", "LOS"],
-    countdownColors = ["white", "yellow", "orange", "red"], countdownInterval = 500, countdownInProgress = false;
-    gameOver = false, onGround = true, gameStarted = false, countdownDone = false,
-    speedMin = 15, speedMax = 35, score = 0, enemyPos = 0, enemySpeed = 0, bgSpeed = 3,
-    highscore = localStorage.getItem("highscore") ? +localStorage.getItem("highscore") : 0; 
-
-const enemyEl = getEl("enemyCharacter"),
-    playerEl = getEl("playerCharacter"),
-    startMenuEl = getEl("startMenu"),
-    bgEl = getEl("gameBackground"),
-    scoreEl = getEl("currentScoreDisplay"),
-    highscoreEl = getEl("highscoreDisplay"),
-    countdownEl = getEl("startMenuContent"),
-    playerXPos = +getComputedStyle(document.documentElement).getPropertyValue("--player-xpos"), //+ entspricht parseInt()
-    sfx_jump = new Audio("sfx/jump.mp3"),
-    sfx_dead = new Audio("sfx/death.mp3"),
-    sfx_music = new Audio("sfx/music_p.mp3");
-
-sfx_music.loop = true;
-
-function getEl(id) {
-    return document.getElementById(id);
-}
-
 document.addEventListener("keydown", function (event) {
     let code = event.code;
     if (code === "F4") {
@@ -29,31 +5,13 @@ document.addEventListener("keydown", function (event) {
     } else if ((code === "Space" || code === "KeyW" || code === "ArrowUp") && (countdownInProgress === false)) {
         if (gameStarted) {
             jump();
-        } else if (!countdownDone) {
+         } else if (!countdownDone) {
              startCountdown();
         } else {
             startGame();
         }
     }
 });
-
-function startCountdown() {
-    countdownDone = true;
-    countdownInProgress = true;
-    for (let i = 0; i < countdownText.length; i++) {
-        setTimeout(function () {
-            countdownEl.textContent =  countdownText[i];
-            countdownEl.style.color = countdownColors[i];
-            countdownEl.style.fontSize = (i*2  + 1.5) + "vw";
-        }, i * countdownInterval);
-    }
-    setTimeout(function () {
-        countdownDone = true;
-        countdownInProgress = false;
-        countdownEl.style.color = "white";
-        startGame();
-    }, countdownText.length * countdownInterval);
-}
 
 function startGame() {
     sfx_music.play();
@@ -120,8 +78,4 @@ function handleGameOver() {
         gameStarted = false;
         countdownDone = false;
     }, 1000);
-}
-
-function randSpeed(min, max) {
-    return Math.random() * (max - min) + min;
 }
