@@ -1,10 +1,11 @@
-let countdownInProgress = false, newHighscoreInput = false,
+let countdownInProgress = false, newHighscoreInput = false, level = 0, fuckYou = 20,
     countdownText = ["3", "2", "1", "LOS"], countdownColors = ["white", "yellow", "orange", "red"],
     gameOver = false, onGround = true, gameStarted = false, countdownDone = false,
-    speedMin = 15, speedMax = 35, score = 0, enemyPos = 0, enemySpeed = 0, bgSpeed = 3,
+    score = 0, enemyPos = 0, enemySpeed = 0, bgSpeed = 1,
     highscore = localStorage.getItem("highscore") ? +localStorage.getItem("highscore") : 0;
 
 const countdownInterval = 420,
+    levelEl = getEl("currentLevel"),
     enemyEl = getEl("enemyCharacter"),
     playerEl = getEl("playerCharacter"),
     startMenuEl = getEl("startMenu"),
