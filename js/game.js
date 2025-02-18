@@ -17,6 +17,12 @@ document.addEventListener("keydown", function (event) {
 });
 
 function startGame() {
+    speedMin = 10;
+    speedMax = 15;
+    bgSpeed = 1;
+    enemyEl.style.bottom = "var(--enemy-ypos)";
+    enemyEl.style.width = "256px";
+    enemyEl.style.height = "128px";
     sfx_music.play();
     gameStarted = true;
     gameOver = false;
@@ -33,7 +39,7 @@ function startGame() {
 }
 
 function jump() {
-    if (gameOver || !onGround) return;
+    if (gameOver || !onGround || (score === fuckYou)) return;
     sfx_jump.play();
     playerEl.classList.add("jump");
     playerEl.style.backgroundImage = "var(--player-jump)";
@@ -51,16 +57,19 @@ function moveEnemy() {
         playerEl.style.backgroundImage = "var(--player-alert)";
         enemyEl.style.backgroundImage = "var(--enemy-alert)";
     }
-    enemyEl.style.left = (enemyPos -= enemySpeed) + "px";
-    if (enemyPos < 120 + playerXPos && onGround) {
+    if (enemyPos < 120 + playerXPos && onGround){
         handleGameOver();
-    } else if (enemyPos < 0) {
+    } else if (enemyPos < 0 - 128) {
         enemyPos = window.innerWidth;
         score++;
+        levelUp();
         updateScores();
         enemyEl.style.backgroundImage = "var(--enemy)";
         enemySpeed = randSpeed(speedMin, speedMax);
+    }if(score === fuckYou){
+        enemySpeed = 10;
     }
+    enemyEl.style.left = (enemyPos -= enemySpeed) + "px";
     requestAnimationFrame(moveEnemy);
 }
 
@@ -79,7 +88,6 @@ function handleGameOver() {
     playerEl.style.backgroundImage = "var(--player-collision)";
     enemyEl.style.backgroundImage = "var(--enemy-collision)";
     gameOver = true;
-
     if (score > highscore) {
         countdownEl.innerHTML = newHighscoreMessage;
         inputFieldEl.style.display = "block";
@@ -91,7 +99,10 @@ function handleGameOver() {
             gameStarted = false;
             countdownDone = false;
             inputFieldEl.focus();
+            playerEl.style.backgroundImage = "var(--player-collision)";
+
         }, 1000);
+    playerEl.style.backgroundImage = "var(--player-collision)";
     newHighscoreInput = true; 
     } else {
         newHighscoreInput = false;
@@ -100,5 +111,24 @@ function handleGameOver() {
         gameStarted = false;
         countdownDone = false;
         inputFieldEl.style.display = "none";
+        playerEl.style.backgroundImage = "var(--player-collision)";
+    }
+}
+
+function levelUp(){
+        levelEl.textContent = "Level: " + score;
+        speedMin+=2;
+        speedMax++;
+        bgSpeed++;
+    if (score === fuckYou){
+        level = "Fuck You";
+        levelEl.textContent = "Level: " + level;
+        enemyEl.style.bottom = "var(--enemy-yposFU)";
+        enemyEl.style.width = "768px";
+        enemyEl.style.height = "384px";
+        enemyEl.style.backgroundSize = 'cover';
+        if (enemyPos < 128 + playerXPos) {
+            handleGameOver();
+        }
     }
 }
