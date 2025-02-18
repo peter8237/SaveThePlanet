@@ -8,7 +8,9 @@
     --player-collision: url("img/erde_collision.png");
     --game-background: url("../img/weltall.png"); /* strange fix */
     --player-xpos: 20; /* für leichtere übergabe an js ohne px */
-    --characters-ypos: 33%;
+    --characters-ypos: calc(50vh - 128px);
+    --enemy-ypos: calc(50vh - 128px);
+    --enemy-yposFU: calc(50vh - 256px);
     --unit: 1px; /*wird verwendet um durch multiplikation mit --player-xpos Xpx zu erhalten */
 }
 
@@ -25,7 +27,7 @@ body {
     height: 100%;
     background-image: var(--game-background);
     background-repeat: repeat-x; 
-    z-index: -1;
+    z-index: -2;
 }
 
 #playerCharacter {
@@ -43,9 +45,10 @@ body {
     height: 128px;
     background-image: var(--enemy);
     right: 0;
-    bottom: var(--characters-ypos);
+    bottom: var(--enemy-ypos);
+    z-index: -1;
 }
-
+#currentLevel,
 #currentScoreDisplay,
 #highscoreDisplay {
     position: absolute;
@@ -54,6 +57,10 @@ body {
     font-size: 1.5vw;
     color: white;
     font-weight: bold;
+}
+
+#currentScoreDisplay{
+    display: none;
 }
 
 #highscoreDisplay {
@@ -66,7 +73,7 @@ body {
     height: 100%;
     font-size: 1.5vw;
     text-align: center;
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.4);
     color: white;
     display: flex;
     justify-content: center;
