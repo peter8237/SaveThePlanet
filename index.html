@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Save the Planet</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <div id="currentScoreDisplay">Score: 0</div>
+    <div id="gameBackground"></div>
+    <div id="playerCharacter" class="character"></div>
+    <div id="enemyCharacter" class="character"></div>
+    <div id="startMenu">
+        <div id="topHighscores"></div>
+        <span id="startMenuContent"><br>Spring mit der Erde über die Asteroiden mit der Leertaste.<br><br>Um zu beginnen, drücke die <span style="color: orange;">Leertaste</span>.</span>
+        <input type="text" id="inputField" placeholder="Dein Name" maxlength="22" style="display: none"> <!-- zur sauberen darstellung wird die eingabe auf 22 zeichen beschränkt -->
+    </div>
+    <script src="js/config.js"></script>
+    <script src="js/game.js"></script>
+    <script src="js/countdown.js"></script>
+    <script src="js/background.js"></script>
+    <script src="js/highscores.js"></script>
+    <script src="js/eventListeners.js"></script>
+</body>
+</html>
