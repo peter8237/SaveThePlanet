@@ -1,6 +1,3 @@
-const SUPABASE_URL = process.env.SUPABASE_URL;
-const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY;
-
 const noEntryYet ="(╯°□°）╯︵ ┻━┻";
     countdownText = ["3", "2", "1", "LOS"],
     countdownColors = ["white", "yellow", "orange", "red"],
